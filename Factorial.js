@@ -1,21 +1,28 @@
 solicitarNumero();
 
-//Funcion para solicitar el número
+// Función para solicitar el número
 function solicitarNumero() {
     let numero;
     while (true) {
         numero = prompt("Ingrese un número: ");
-        // Convertimos la entrada número
+
+        // Verificar si la entrada es un número
+        if (isNaN(numero) || numero === "") {
+            alert("Error: Debe ingresar un número válido."); // Mensaje de error
+            continue; // Volver a solicitar el número
+        }
+
+        // Convertimos la entrada a número
         numero = Number(numero);
+
         // Calcular factorial
         const resultado = calcularFactorial(numero);
         console.log("El factorial de " + numero + " es " + resultado);
         mostrarResultado(numero, resultado);
-        break;
-
-
+        break; // Salir del bucle una vez que se obtiene un número válido
     }
 }
+
 // Calcular factorial
 function calcularFactorial(numero) {
     if (numero < 0) {
@@ -30,11 +37,9 @@ function calcularFactorial(numero) {
         factorial *= i;
     }
     return factorial;
-
-
 }
 
-//Mostrar resultado en la página web
+// Mostrar resultado en la página web
 function mostrarResultado(numero, resultado) {
     const resultadoDiv = document.getElementById("resultado");
     resultadoDiv.innerHTML = "El factorial de " + numero + " es " + resultado;
